@@ -20,9 +20,11 @@ namespace MvcMovie.Models
 
     public class CodeDBContext : DbContext
     {
+        // constructor
         public CodeDBContext() : base("CodeDBContext")
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<CodeDBContext>());  // Create a database every time the application is started 
+            // Create a database every time the application is started 
+            Database.SetInitializer(new DropCreateDatabaseAlways<CodeDBContext>());  
         }
         public DbSet<Code> Codes { get; set; }
     }
