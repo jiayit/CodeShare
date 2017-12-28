@@ -22,7 +22,7 @@ namespace MvcMovie.Models
     {
         public CodeDBContext() : base("CodeDBContext")
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<CodeDBContext>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<CodeDBContext>());  // Create a database every time the application is started 
         }
         public DbSet<Code> Codes { get; set; }
     }
