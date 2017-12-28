@@ -1,0 +1,65 @@
+﻿@model MvcMovie.Models.Code
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container body-content">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-inline">
+
+            <div class="form-group">
+
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control col-md-5", @placeholder = "Title" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+
+                @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control", @placeholder = "Author" } })
+                @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                @*use a drop down list *@
+                @Html.DropDownListFor(model => model.Language, (List<SelectListItem>)ViewBag.list, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Language, "", new { @class = "text-danger" })
+
+            </div>
+
+            @*<div class="form-group">
+
+                    @Html.EnumDropDownListFor(model => model.languages, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.languages, "", new { @class = "text-danger" })
+
+                </div>*@
+            <div class="form-group">
+
+                <input type="submit" value="Share" class="btn btn-primary" />
+
+            </div>
+        </div>
+        <br />
+        <div class="form-inline">
+            @*set attribute of the textarea *@
+            @Html.EditorFor(model => model.Addcode, new { htmlAttributes = new { @class = "form-control", cols = "20", row = "25", placeholder = "Paste code here.", style = "min-width:100%" } }) 
+            @Html.ValidationMessageFor(model => model.Addcode, "", new { @class = "text-danger" })
+
+        </div>
+
+
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

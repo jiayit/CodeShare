@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MvcMovie.Models.Code>
+
+@{
+    ViewBag.Title = "List";
+}
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+    </div>
+
+    <div class="row">
+        <table class="table" style="width:unset; margin-bottom:unset">
+            <tr>
+                <td>
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                    @Html.DisplayFor(modelItem => item.Language, new { @class = "Languages" })
+                </td>
+                @*<td>
+                        <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                        @Html.DisplayFor(modelItem => item.languages)
+                    </td>*@
+                <td>
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>    
+                    @DateTime.Now.Date.ToString("yyyy/MM/dd HH:mm:ss")
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <div class="row">
+        <style>
+            #editor {
+                height: 500px;
+            }
+        </style>
+
+        <pre id="editor">@Html.DisplayFor(modelItem => item.Addcode)</pre>
+        <script src="/Scripts/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+
+            var lang = document.getElementsByClassName("Languages");
+            var mode = "ace/theme/" + lang;
+            console.log(mode);
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/github");
+            editor.getSession().setMode(mode);
+            editor.setReadOnly(true);
+            editor.getSession().setUseWrapMode(true);
+            editor.setFontSize(13);
+        </script>
+    </div>
+
+}
+@Scripts.Render("~/bundles/ace")
+
